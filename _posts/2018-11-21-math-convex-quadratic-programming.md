@@ -1,87 +1,15 @@
 ---
 layout: post
-title: "SVM数学原理与python实现"
-subtitle: 'The Mathematical Principles and Python Implementation of SVM'
+title: "拉格朗日对偶问题"
+subtitle: 'The Mathematical Principles of Convex Quadratic Programming'
 author: "Quanli"
 header-style: text
 catalog: true
 mathjax: true
 tags:
-  - machine learning
-  - SVM
+  - math
 ---
 
-Support Vector Machine(SVM)主要包括：
-* 线性可分向量机与硬间隔最大化
-* 线性可分向量机与软间隔最大化
-* 非线性支持向量机与核函数
-
-## 线性可分向量机与硬间隔最大化
-
-### 函数间隔与几何间隔
-**函数间隔** 对于给定的训练数据集$T$和超平面$(\omega,b)$，定义超平面$(\omega,b)$关于样本点$(x_i,y_i)$的函数间隔为：
-
-$$
-\hat{\gamma}_i=y_i(\omega \cdot x_i + b)
-$$
-
-定义超平面$(\omega, b)$关于训练数据集$T$的函数间隔为超平面$(\omega,b)$关于$T$中所有样本点$(x_i, y_i)$的函数间隔最小值，即：
-
-$$
-\hat{\gamma}={min}_{i=1,\cdots,N}\hat{\gamma}_i
-$$
-
-**几何间隔** 对于给定的训练数据集$T$和超平面$(\omega,b)$，定义超平面$(\omega,b)$关于样本点$(x_i,y_i)$的几何间隔为：
-
-$$
-\gamma_i=y_i \left(\frac{\omega}{||\omega||} \cdot x_i + \frac{b}{||\omega||} \right)
-$$
-
-定义超平面$(\omega, b)$关于训练数据集$T$的几何间隔为超平面$(\omega,b)$关于$T$中所有样本点$(x_i,y_i)$的几何间隔的最小值，即：
-
-$$
-\gamma={min}_{i=1,\cdots,N} \gamma_i
-$$
-
-
-### 间隔最大化
-支持向量机学习是求解能够正确划分训练数据集并且几何间隔最大的分离超平面。
-
-**最大化间隔分离超平面** 如何求得一个几何间隔最大的分离超平面，即最大间隔分离超平面。
-
-具体地，可以表示为下面的约束最优化问题：
-
-$$
-\bagin{align}
-& {max}_{\omega,b} \quad \gamma \\
-& s.t. \quad y_i\left( \frac{\omega}{||\omega||} \cdot x_i + \frac{b}{||\omega||} \right) \ge \gamma, \quad i=1,2,\cdots,N
-\end{align}
-$$
-
-约束条件表示的是超平面$(\omega, b)$关于每个训练样本点的几何间隔至少是$\gamma$。
-
-考虑几何间隔和函数间隔的关系，可将该问题改写成：
-
-$$
-\begin{align}
-& {max}_{\omega, b} \quad \frac{\hat{\gamma}}{||\omega||}
-& s.t. \quad y_i(\omega \cdot x_i + b) \ge \hat{\gamma}, \quad i=1,2,\cdots,N
-\end{align}
-$$
-
-
-函数间隔$\hat{\gamma}$的取值并不影响最优化问题的解。事实上，假设将$\omega$和$b$按比例改成$\lambda \omega$和$\lambda \b$，这时函数间隔成为$\lambda \hat{\gamma}$，这对最优化问题的不等式约束没有影响，对目标函数的优化也没有影响。因此，将$\hat{\gamma}$=1代入上式。另外，最大化$\frac{\mathrm{1}}{\|\| \omega \|\|}和最小化$\frac{\mathrm{1}}{\mathrm{2}}\|\|\omega\|\|^2$是等价的。
-
-经过上述变化后，最优化问题转变成：
-
-$$
-\begin{align}
-& {min}_{\omega, b} \quad \frac{1}{2}|| omega ||^2
-& s.t. \quad y_i(\omega \cdot x_i + b) - 1 \ge 0, \quad i=1,2, \cdots, N
-\end{align}
-$$
-
-这时一个[凸优化问题](https://clgsnail.github.io/2018/11/21/math-convex-quadratic-programming/)
 
 
 
